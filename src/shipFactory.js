@@ -18,25 +18,5 @@ class Ship {
     return this.hitCount === this.length;
   }
 }
-// const Ship = (length = 1) => {
-//   let hitCount = 0;
-
-//   const hit = () => {
-//     if (!isSunk()) {
-//       hitCount++;
-//     }
-//   };
-
-//   const isSunk = () => {
-//     return hitCount === length;
-//   };
-
-//   return {
-//     length,
-//     hit,
-//     isSunk,
-//     hitCount,
-//   };
-// };
 
 module.exports = Ship;

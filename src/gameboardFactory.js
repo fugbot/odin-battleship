@@ -62,11 +62,11 @@ class Gameboard {
     if (row > 10 || row < 0 || col > 10 || col < 0) {
       throw new Error("Invalid position!");
     }
-    console.log(`Attacking position: (${row}, ${col})`);
-    console.log(
-      `Current board state at (${row}, ${col}):`,
-      this.board[row][col]
-    );
+    // console.log(`Attacking position: (${row}, ${col})`);
+    // console.log(
+    //   `Current board state at (${row}, ${col}):`,
+    //   this.board[row][col]
+    // );
     //if no ship
     if (this.board[row][col] === null) {
       this.board[row][col] = "miss";

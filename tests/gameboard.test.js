@@ -1,11 +1,6 @@
 const Gameboard = require("../src/gameboardFactory");
 const Ship = require("../src/shipFactory");
 
-test("Should be able to place ship at specific coordinates via ship factory", () => {
-  let gb = new Gameboard();
-  let ship1 = new Ship();
-});
-
 test("Place ship horizontally", () => {
   let gb = new Gameboard();
   let ship1 = new Ship();
@@ -33,7 +28,6 @@ test("Try to place ship out of gameboard bounds", () => {
 test("Miss a shot - records coordinates", () => {
   let gb = new Gameboard();
   gb.receiveAttack(1, 1);
-  console.log(gb.board[1][1]);
   expect(gb.board[1][1]).toEqual("miss");
 });
 
