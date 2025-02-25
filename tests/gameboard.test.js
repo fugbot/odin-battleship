@@ -33,21 +33,39 @@ test("Try to place ship out of gameboard bounds", () => {
 test("Miss a shot - records coordinates", () => {
   let gb = new Gameboard();
   gb.receiveAttack(1, 1);
+  console.log(gb.board[1][1]);
   expect(gb.board[1][1]).toEqual("miss");
 });
 
-test("Hit a ship - hits correct ship", () => {
+test("Hit a ship - hits correct ship & is sunk", () => {
   let gb = new Gameboard();
-  gb.receiveAttack();
-  expect();
+  let ship1 = new Ship();
+  gb.placeShip(ship1, 1, 1, "horizontal");
+  gb.receiveAttack(1, 1);
+  expect(gb.board[1][1]).toEqual("hit");
+  expect(ship1.hitCount).toEqual(1);
+  expect(ship1.isSunk()).toBe(true);
 });
 
-test("Attack already attacked position - returns false", () => {});
+test("Attack already attacked position - returns false", () => {
+  let gb = new Gameboard();
+  let ship1 = new Ship();
+  gb.receiveAttack(1, 1);
+  expect(gb.board[1][1]).toEqual("miss");
+  expect(gb.receiveAttack(1, 1)).toBe(false);
+});
 
 test("Report all ships sunk", () => {
   let gb = new Gameboard();
+  // expect(() => {
+  //   gb.allShipsSunk();
+  // }).toBe(true);
+  expect(gb.allShipsSunk()).toBe(true);
 });
 
 test("Report NOT all ships sunk", () => {
   let gb = new Gameboard();
+  let ship1 = new Ship();
+  gb.placeShip(ship1, 1, 1, "horizontal");
+  expect(gb.allShipsSunk()).toBe(false);
 });

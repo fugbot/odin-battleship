@@ -3,7 +3,7 @@ class Gameboard {
     this.board = Array(10)
       .fill(null)
       .map(() => Array(10).fill(null));
-    this.ships = [];
+    this.shipsCollector = [];
   }
 
   // checkBounds(ship, row, col) {
@@ -35,6 +35,7 @@ class Gameboard {
       //place ship
       for (let i = 0; i < ship.length; i++) {
         this.board[row][col + i] = ship;
+        this.shipsCollector.push(ship);
       }
     }
     if (direction === "vertical") {
@@ -50,6 +51,7 @@ class Gameboard {
       //place ship
       for (let i = 0; i < ship.length; i++) {
         this.board[row + i][col] = ship;
+        this.shipsCollector.push(ship);
       }
     }
   }
@@ -86,6 +88,9 @@ class Gameboard {
 
   allShipsSunk() {
     // Logic to check if all ships are sunk
+    //get all ships
+    return this.shipsCollector.every((ship) => ship.isSunk());
+    //check if all ships are sunk
   }
 }
 
