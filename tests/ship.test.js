@@ -1,5 +1,4 @@
 const Ship = require("../src/shipFactory");
-const ship = require("../src/shipFactory");
 
 test("hello", () => {
   expect("hello").toBe("hello");
