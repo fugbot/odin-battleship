@@ -1,4 +1,4 @@
-const Gameboard = require("./gameboardFactory");
+import Gameboard from "./gameboardFactory";
 
 class Player {
   constructor(type) {
@@ -10,4 +10,4 @@ class Player {
   }
 }
 
-module.exports = Player;
+export default Player;

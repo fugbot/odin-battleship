@@ -1,4 +1,4 @@
-const Player = require("../src/playerFactory");
+import Player from "../src/factories/playerFactory";
 
 test("Should throw error if player is not human/computer", () => {
   expect(() => {

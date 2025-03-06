@@ -1,4 +1,4 @@
-const Ship = require("../src/shipFactory");
+import Ship from "../src/factories/shipFactory";
 
 test("hello", () => {
   expect("hello").toBe("hello");

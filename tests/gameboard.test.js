@@ -1,5 +1,5 @@
-const Gameboard = require("../src/gameboardFactory");
-const Ship = require("../src/shipFactory");
+import Gameboard from "../src/factories/gameboardFactory";
+import Ship from "../src/factories/shipFactory";
 
 test("Place ship horizontally", () => {
   let gb = new Gameboard();
