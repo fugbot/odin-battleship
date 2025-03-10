@@ -1,3 +1,17 @@
 *:hover {
   border: 2px blue solid;
 }
+
+.board div {
+  border: 2px black solid;
+}
+
+.board div:hover {
+  background-color: rgb(76, 110, 245);
+}
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(10, 40px);
+  grid-template-columns: repeat(10, 40px);
+}
