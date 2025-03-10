@@ -1,7 +1,8 @@
-import Player from "./factories/playerFactory";
-import Gameboard from "./factories/gameboardFactory";
+import Player from "./factories/playerFactory.js";
+import Gameboard from "./factories/gameboardFactory.js";
+import Ship from "./factories/shipFactory.js";
 
-const gameModule = () => {
+export default function gameModule() {
   let player1 = new Player("human");
   let player2 = new Player("computer");
 
@@ -27,20 +28,74 @@ const gameModule = () => {
   let cruiser2 = new Ship(3);
   let submarine2 = new Ship(3);
   let destroyer2 = new Ship(2);
-  gb1.placeShip(carrier2, 1, 1, "horizontal");
-  gb1.placeShip(battleship2, 5, 0, "horizontal");
-  gb1.placeShip(cruiser2, 2, 6, "vertical");
-  gb1.placeShip(submarine2, 4, 9, "vertical");
-  gb1.placeShip(destroyer2, 8, 5, "horizontal");
+  gb2.placeShip(carrier2, 1, 1, "horizontal");
+  gb2.placeShip(battleship2, 5, 0, "horizontal");
+  gb2.placeShip(cruiser2, 2, 6, "vertical");
+  gb2.placeShip(submarine2, 4, 9, "vertical");
+  gb2.placeShip(destroyer2, 8, 5, "horizontal");
 
-  //display board
-  for (let i = 0; i < gb1.board.length; i++) {
-    for (let j = 0; j < gb1.board.length; i++) {
+  //display player board
+  createPlayerBoard(gb1);
+  // for (let i = 0; i < gb1.board.length; i++) {
+  //   for (let j = 0; j < gb1.board.length; j++) {
+  //     console.log("hello from game board");
+  //     const div = document.createElement("div");
+  //     const playerBoard = document.querySelector("#player-board");
+  //     div.textContent = `${i} ${j}`;
+  //     div.setAttribute("id", `[${i}, ${j}]`);
+  //     playerBoard.append(div);
+  //     if (gb1.board[i][j] instanceof Ship) {
+  //       div.textContent = "ship";
+  //       div.classList.add("ship");
+  //     }
+  //   }
+  // }
+
+  //display computer board
+  createComputerBoard(gb2);
+  // for (let i = 0; i < gb2.board.length; i++) {
+  //   for (let j = 0; j < gb2.board.length; j++) {
+  //     const div = document.createElement("div");
+  //     const computerBoard = document.querySelector("#computer-board");
+  //     div.textContent = `${i} ${j}`;
+  //     div.setAttribute("id", `[${i}, ${j}]`);
+  //     computerBoard.append(div);
+  //     if (gb2.board[i][j] instanceof Ship) {
+  //       div.textContent = "ship";
+  //       div.classList.add("ship");
+  //     }
+  //   }
+  // }
+}
+
+function createPlayerBoard(grid) {
+  for (let i = 0; i < grid.board.length; i++) {
+    for (let j = 0; j < grid.board.length; j++) {
       const div = document.createElement("div");
-      const playerBoard = document.getElementById("player-board");
+      const playerBoard = document.querySelector("#player-board");
+      div.textContent = `${i} ${j}`;
+      div.setAttribute("id", `[${i}, ${j}]`);
       playerBoard.append(div);
+      if (grid.board[i][j] instanceof Ship) {
+        div.textContent = "ship";
+        div.classList.add("ship");
+      }
     }
   }
-};
+}
 
-gameModule();
+function createComputerBoard(grid) {
+  for (let i = 0; i < grid.board.length; i++) {
+    for (let j = 0; j < grid.board.length; j++) {
+      const div = document.createElement("div");
+      const computerBoard = document.querySelector("#computer-board");
+      div.textContent = `${i} ${j}`;
+      div.setAttribute("id", `[${i}, ${j}]`);
+      computerBoard.append(div);
+      if (grid.board[i][j] instanceof Ship) {
+        div.textContent = "ship";
+        div.classList.add("ship");
+      }
+    }
+  }
+}
