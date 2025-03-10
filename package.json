@@ -1,4 +1,7 @@
 {
+  "name": "odin-battleship_spiral",
+  "version": "1.0.0",
+  "type": "module",
   "devDependencies": {
     "jest": "^29.7.0"
   },
@@ -8,6 +11,5 @@
   },
   "jest": {
     "transform": {}
-  },
-  "type": "module"
+  }
 }
