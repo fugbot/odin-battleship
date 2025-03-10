@@ -1,4 +1,4 @@
-import Ship from "../src/factories/shipFactory";
+import Ship from "../src/factories/shipFactory.js";
 
 test("hello", () => {
   expect("hello").toBe("hello");

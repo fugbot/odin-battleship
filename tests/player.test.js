@@ -1,4 +1,4 @@
-import Player from "../src/factories/playerFactory";
+import Player from "../src/factories/playerFactory.js";
 
 test("Should throw error if player is not human/computer", () => {
   expect(() => {

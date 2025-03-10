@@ -1,5 +1,5 @@
-import Gameboard from "../src/factories/gameboardFactory";
-import Ship from "../src/factories/shipFactory";
+import Gameboard from "../src/factories/gameboardFactory.js";
+import Ship from "../src/factories/shipFactory.js";
 
 test("Place ship horizontally", () => {
   let gb = new Gameboard();
