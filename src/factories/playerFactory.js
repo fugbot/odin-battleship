@@ -2,7 +2,7 @@ import Gameboard from "./gameboardFactory.js";
 
 class Player {
   constructor(type) {
-    if (!["human", "computer"].includes(type)) {
+    if (!["player", "computer"].includes(type)) {
       throw new Error("Invalid player type");
     }
     this.type = type;
