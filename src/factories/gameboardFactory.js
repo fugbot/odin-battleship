@@ -24,49 +24,44 @@ class Gameboard {
   placeShip(ship, row, col, direction) {
     // Logic to place ship on the board
     if (direction === "horizontal") {
-      //check bounds
+      // Check bounds
       if (col + ship.length > 10 || row >= 10) {
         throw new Error("Ship is out of bounds. Pick new placement.");
       }
-      //check if on top of another ship
+      // Check if on top of another ship
       for (let i = 0; i < ship.length; i++) {
         if (this.board[row][col + i]) return false;
       }
-      //place ship
+      // Place ship
       for (let i = 0; i < ship.length; i++) {
         this.board[row][col + i] = ship;
-        this.shipsCollector.push(ship);
       }
+      this.shipsCollector.push(ship); // Add ship to shipsCollector once
     }
+
     if (direction === "vertical") {
-      //check bounds
+      // Check bounds
       if (row + ship.length > 10 || col >= 10) {
         throw new Error("Ship is out of bounds. Pick new placement.");
       }
-      //check if on top of another ship
+      // Check if on top of another ship
       for (let i = 0; i < ship.length; i++) {
         if (this.board[row + i][col]) return false;
       }
-
-      //place ship
+      // Place ship
       for (let i = 0; i < ship.length; i++) {
         this.board[row + i][col] = ship;
-        this.shipsCollector.push(ship);
       }
+      this.shipsCollector.push(ship); // Add ship to shipsCollector once
     }
   }
 
   receiveAttack(row, col) {
     // Logic to handle attack on the board
-
     if (row > 10 || row < 0 || col > 10 || col < 0) {
       throw new Error("Invalid position!");
     }
-    // console.log(`Attacking position: (${row}, ${col})`);
-    // console.log(
-    //   `Current board state at (${row}, ${col}):`,
-    //   this.board[row][col]
-    // );
+
     //if no ship
     if (this.board[row][col] === null) {
       this.board[row][col] = "miss";
@@ -89,9 +84,11 @@ class Gameboard {
   allShipsSunk() {
     // Logic to check if all ships are sunk
     //get all ships
-    return this.shipsCollector.every((ship) => ship.isSunk());
+    this.shipsCollector.every((ship) => ship.isSunk());
     //check if all ships are sunk
   }
+
+  updateBoard() {}
 }
 
 export default Gameboard;
