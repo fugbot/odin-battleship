@@ -1,3 +1,9 @@
-import gameModule from "./gamePlay.js";
+import {
+  createPlayerBoard,
+  createComputerBoard,
+} from "./gamePlayController.js";
 
-gameModule();
+/* document.addEventListener("DOMContentLoaded", () => {
+  createPlayerBoard();
+  createComputerBoard();
+}); */
