@@ -1,6 +1,6 @@
-*:hover {
+/* *:hover {
   border: 2px blue solid;
-}
+} */
 
 .board div {
   border: 2px black solid;
@@ -14,4 +14,12 @@
   display: grid;
   grid-template-rows: repeat(10, 40px);
   grid-template-columns: repeat(10, 40px);
+}
+
+.board div.miss {
+  background-color: grey;
+}
+
+.board div.hit {
+  background-color: red;
 }
