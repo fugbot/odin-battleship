@@ -26,7 +26,8 @@ class Gameboard {
     if (direction === "horizontal") {
       // Check bounds
       if (col + ship.length > 10 || row >= 10) {
-        throw new Error("Ship is out of bounds. Pick new placement.");
+        console.log("Ship is out of bounds. Pick new placement.");
+        return false;
       }
       // Check if on top of another ship
       for (let i = 0; i < ship.length; i++) {
@@ -37,12 +38,14 @@ class Gameboard {
         this.board[row][col + i] = ship;
       }
       this.shipsCollector.push(ship); // Add ship to shipsCollector once
+      return true;
     }
 
     if (direction === "vertical") {
       // Check bounds
       if (row + ship.length > 10 || col >= 10) {
-        throw new Error("Ship is out of bounds. Pick new placement.");
+        console.log("Ship is out of bounds. Pick new placement.");
+        return false;
       }
       // Check if on top of another ship
       for (let i = 0; i < ship.length; i++) {
@@ -52,7 +55,8 @@ class Gameboard {
       for (let i = 0; i < ship.length; i++) {
         this.board[row + i][col] = ship;
       }
-      this.shipsCollector.push(ship); // Add ship to shipsCollector once
+      this.shipsCollector.push(ship);
+      return true;
     }
   }
 
@@ -84,11 +88,9 @@ class Gameboard {
   allShipsSunk() {
     // Logic to check if all ships are sunk
     //get all ships
-    this.shipsCollector.every((ship) => ship.isSunk());
+    return this.shipsCollector.every((ship) => ship.isSunk());
     //check if all ships are sunk
   }
-
-  updateBoard() {}
 }
 
 export default Gameboard;
