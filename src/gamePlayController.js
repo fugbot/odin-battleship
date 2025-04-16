@@ -58,13 +58,7 @@ let shipsToPlace = [carrier, battleship, cruiser, submarine, destroyer];
 // //display computer board
 // createComputerBoard(gb2);
 
-export function gamePlay() {
-  //player goes first
-  console.log("player's turn");
-  //switch turn
-  newGame.switchTurn();
-  //computer goes
-}
+export function startGame() {}
 
 export function createPlayerBoard(grid) {
   //const playerBoardElements = [];
@@ -132,6 +126,7 @@ function playerAttack() {
 
   if (game.checkGameOver()) {
     console.log(`${game.currentPlayer} won!`);
+    endGame();
     return;
   }
 
@@ -171,6 +166,7 @@ function computerAttack() {
 
   if (game.checkGameOver()) {
     console.log(`${game.currentPlayer} won!`);
+    endGame();
     return;
   }
 
@@ -186,7 +182,7 @@ function updateBoard() {
 //after game over
 function startNewGame() {}
 
-function placeShipsRandomly() {
+export function placeShipsRandomly() {
   shipsToPlace.forEach((ship) => {
     let attempts = 0;
     let direction, row, col;
@@ -227,4 +223,13 @@ function placeShipsRandomly() {
   createComputerBoard(gb2);
 }
 
-placeShipsRandomly();
+function endGame() {
+  const dialog = document.querySelector("dialog");
+  dialog.showModal();
+  const resetBtn = document.querySelector(".reset");
+  resetBtn.addEventListener("click", () => {
+    console.log("reset game");
+  });
+}
+
+//placeShipsRandomly();
