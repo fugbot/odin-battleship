@@ -86,10 +86,7 @@ class Gameboard {
   }
 
   allShipsSunk() {
-    // Logic to check if all ships are sunk
-    //get all ships
     return this.shipsCollector.every((ship) => ship.isSunk());
-    //check if all ships are sunk
   }
 }
 
