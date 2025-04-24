@@ -9,15 +9,22 @@
   <body>
     <h1>Battleship</h1>
     <button id="new-game">New Game</button>
-    <h2>Player Board</h2>
-    <div id="player-board" class="board"></div>
+    <div class="gameboards">
+      <div class="player">
+        <h2>Player Board</h2>
+        <div id="player-board" class="board"></div>
+      </div>
 
-    <h2>Computer Board</h2>
-    <div id="computer-board" class="board"></div>
+      <div class="computer">
+        <h2>Computer Board</h2>
+        <div id="computer-board" class="board"></div>
+      </div>
+    </div>
 
-    <h2>Place your ships</h2>
     <div class="create">
+      <h2>Place your ships</h2>
       <button id="rotate">Rotate</button>
+      <button id="random">Random</button>
       <div id="create-board" class="board"></div>
     </div>
 

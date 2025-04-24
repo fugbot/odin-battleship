@@ -6,6 +6,12 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.gameboards {
+  display: flex;
+  gap: 2em;
+  padding-left: 1rem;
+}
+
 button {
   border: 2px black solid;
   background-color: white;
