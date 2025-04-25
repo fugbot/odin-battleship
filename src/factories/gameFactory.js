@@ -1,3 +1,4 @@
+import Gameboard from "./gameboardFactory.js";
 import Player from "./playerFactory.js";
 
 class Game {
@@ -5,6 +6,9 @@ class Game {
     this.player = new Player("player");
     this.computer = new Player("computer");
     this.currentPlayer = "player";
+
+    this.player.gameboard = new Gameboard();
+    this.computer.gameboard = new Gameboard();
   }
 
   switchTurn() {
@@ -13,13 +17,15 @@ class Game {
   }
 
   checkGameOver() {
-    if (
-      this.player.gameboard.allShipsSunk() ||
-      this.computer.gameboard.allShipsSunk()
-    ) {
-      return true;
+    const playerLost = this.player.gameboard.allShipsSunk();
+    const computerLost = this.computer.gameboard.allShipsSunk();
+    if (playerLost) {
+      return { gameOver: true, winner: "computer" };
+    } else if (computerLost) {
+      return { gameOver: true, winner: "player" };
+    } else {
+      return { gameOver: false, winner: null };
     }
-    return false;
   }
 }
 
