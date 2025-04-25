@@ -6,21 +6,6 @@ class Gameboard {
     this.shipsCollector = [];
   }
 
-  // checkBounds(ship, row, col) {
-  //   //position outside of board
-  //   if (row > 10 || row < 0 || col > 10 || col < 0) {
-  //     throw new Error("Invalid position!");
-  //   } else if (row + ship.length > 10 || col + ship.length > 10) {
-  //     throw new Error("Ship is out of bounds. Pick new placement.");
-  //   }
-  // }
-
-  // checkOverlappingShip(ship, row, col, direction) {}
-
-  // checkPlacement(ship, row, col){
-
-  // }
-
   placeShip(ship, row, col, direction) {
     // Logic to place ship on the board
     if (direction === "horizontal") {
@@ -86,6 +71,7 @@ class Gameboard {
   }
 
   allShipsSunk() {
+    //console.log(this.board.shipsCollector);
     return this.shipsCollector.every((ship) => ship.isSunk());
   }
 }

@@ -1,13 +1,13 @@
 import {
   createPlayerBoard,
   createComputerBoard,
-  initGameboards,
+  initGame,
   placeShipsRandomly,
 } from "./gamePlayController.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+/* document.addEventListener("DOMContentLoaded", () => {
   initGameboards();
-});
+}); */
 
 const newBtn = document.querySelector("button#new-game");
 newBtn.addEventListener("click", () => {
@@ -15,6 +15,7 @@ newBtn.addEventListener("click", () => {
 
   document.getElementById("computer-board").innerHTML = "";
 
+  initGame();
   placeShipsRandomly(); //todo: remove later just for testing
   newBtn.style.display = "none";
 
@@ -25,6 +26,7 @@ newBtn.addEventListener("click", () => {
 const randomBtn = document.querySelector("button#random");
 const createBoard = document.querySelector(".create");
 randomBtn.addEventListener("click", () => {
+  initGame();
   console.log("Place ships randomly");
 
   //todo: if random clicked, clear gameboard objects
