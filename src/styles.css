@@ -25,11 +25,7 @@ button {
 }
 
 .board div {
-  border: 2px black solid;
-}
-
-.board div:hover {
-  background-color: rgb(76, 110, 245);
+  border: 2px rgb(120, 118, 118) solid;
 }
 
 .board {
@@ -53,4 +49,20 @@ button {
 button.cancel {
   color: red;
   border: 2px solid red;
+}
+
+#computer-board div:hover {
+  background-color: rgb(76, 110, 245);
+}
+
+#player-board div.ship {
+  background-color: rgb(126, 146, 228);
+}
+
+#player-board div.hit {
+  background-color: red;
+}
+
+#create-board div.ship {
+  background-color: rgb(245, 107, 130);
 }

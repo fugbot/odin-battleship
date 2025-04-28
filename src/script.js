@@ -1,7 +1,9 @@
 import {
   createCreateBoard,
+  hideCreateSection,
   initGame,
-  placeShipsRandomly,
+  placeCompShipsRandomly,
+  placePlayerShipsRandomly,
   playerPlacesShips,
 } from "./gamePlayController.js";
 
@@ -15,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   newBtn.style.display = "none";
 
   createCreateBoard();
-  playerPlacesShips();
+  //playerPlacesShips();
 });
 
 //click new button
@@ -35,7 +37,7 @@ confirmBtn.addEventListener("click", () => {
   sureDialog.close();
   initGame();
   createCreateBoard();
-  playerPlacesShips();
+  //playerPlacesShips();
   newBtn.style.display = "none";
 });
 
@@ -43,20 +45,19 @@ cancelBtn.addEventListener("click", () => {
   sureDialog.close();
 });
 
-const rotateBtn = document.querySelector("button#rotate");
 const randomBtn = document.querySelector("button#random");
-const createSection = document.querySelector(".create");
-const createBoard = document.querySelector("#create-board");
+
 randomBtn.addEventListener("click", () => {
-  initGame();
+  //initGame();
   console.log("Place ships randomly");
   gameboards.style.display = "";
   newBtn.style.display = "";
 
   //todo: if random clicked, clear gameboard objects
-  placeShipsRandomly();
+  //placeShipsRandomly();
+  placePlayerShipsRandomly();
+  placeCompShipsRandomly();
 
   //remove create board divs & hide buttons
-  createBoard.innerHTML = "";
-  createSection.style.display = "none";
+  hideCreateSection();
 });
