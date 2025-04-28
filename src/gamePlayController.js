@@ -6,29 +6,9 @@ import Game from "./factories/gameFactory.js";
 //start new game
 let game;
 
-//create players
-//let player = game.player;
-//let playerBoard = new Gameboard();
-//let player;
 let playerBoard;
 
-//let computer = game.computer;
-//let computerBoard = new Gameboard();
-//let computer;
 let computerBoard;
-
-//initialize gameboards - this will overwrite all objects
-export function initGame() {
-  game = new Game();
-  //const player = game.player;
-  playerBoard = game.player.gameboard;
-  //computer = game.computer;
-  computerBoard = game.computer.gameboard;
-  //computerBoard = new Gameboard();
-
-  // player.gameboard = playerBoard;
-  // computer.gameboard = computerBoard;
-}
 
 //create ships
 let playerCarrier = new Ship(5);
@@ -58,6 +38,32 @@ let computerShipsToPlace = [
   compSubmarine,
   compDestroyer,
 ];
+
+const createBoard = document.querySelector("#create-board");
+
+//initialize gameboards - this will overwrite all objects
+export function initGame() {
+  game = new Game();
+
+  playerBoard = game.player.gameboard;
+
+  computerBoard = game.computer.gameboard;
+}
+
+export function createCreateBoard() {
+  //create create board
+  for (let i = 0; i < 10; i++) {
+    for (let j = 0; j < 10; j++) {
+      const div = document.createElement("div");
+      div.textContent = `${i} ${j}`;
+      div.setAttribute("id", `create-${i}-${j}`);
+
+      createBoard.append(div);
+    }
+  }
+  const createSection = document.querySelector(".create");
+  createSection.style.display = "";
+}
 
 export function createPlayerBoard(grid) {
   for (let i = 0; i < grid.board.length; i++) {
@@ -95,9 +101,6 @@ export function createComputerBoard(grid) {
 }
 
 function playerAttack() {
-  // console.log("comp", computerBoard);
-  // console.log("player", playerBoard);
-
   if (game.currentPlayer !== "player") return;
 
   if (game.checkGameOver().gameOver) return;
@@ -214,19 +217,7 @@ export function placeShipsRandomly() {
   createComputerBoard(computerBoard);
 }
 
-function playerPlacesShips() {
-  //create create board
-  const createBoard = document.querySelector("#create-board");
-  for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j++) {
-      const div = document.createElement("div");
-      div.textContent = `${i} ${j}`;
-      div.setAttribute("id", `create-${i}-${j}`);
-
-      createBoard.append(div);
-    }
-  }
-
+export function playerPlacesShips() {
   let currentShipIndex = 0;
   let ship = playerShipsToPlace[currentShipIndex];
   let direction = "horizontal"; //default
@@ -315,7 +306,7 @@ function endGame(winner) {
   msg.appendChild(winnerMsg);
   winnerMsg.textContent = `${winner} won!`;
   dialog.showModal();
-  const resetBtn = document.querySelector(".reset");
+  const resetBtn = document.querySelector("button.reset");
   resetBtn.addEventListener("click", () => {
     console.log("reset game");
     document.getElementById("player-board").innerHTML = "";
