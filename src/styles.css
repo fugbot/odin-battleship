@@ -6,6 +6,10 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+h1 {
+  text-align: center;
+}
+
 .gameboards {
   display: flex;
   gap: 2em;
@@ -30,8 +34,8 @@ button {
 
 .board {
   display: grid;
-  grid-template-rows: repeat(10, 40px);
-  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 50px);
+  grid-template-columns: repeat(10, 50px);
 }
 
 .board div.miss {
@@ -40,4 +44,13 @@ button {
 
 .board div.hit {
   background-color: red;
+}
+
+.create button {
+  margin-bottom: 1rem;
+}
+
+button.cancel {
+  color: red;
+  border: 2px solid red;
 }
