@@ -7,23 +7,19 @@ import Game from "./factories/gameFactory.js";
 let game;
 
 let playerBoard;
-
 let computerBoard;
 
-//create ships
+let playerShipsToPlace = [];
+let computerShipsToPlace = [];
+
+/* //create ships
 let playerCarrier = new Ship(5);
 let playerBattleship = new Ship(4);
 let playerCruiser = new Ship(3);
 let playerSubmarine = new Ship(3);
 let playerDestroyer = new Ship(2);
 
-let playerShipsToPlace = [
-  playerCarrier,
-  playerBattleship,
-  playerCruiser,
-  playerSubmarine,
-  playerDestroyer,
-];
+
 
 let compCarrier = new Ship(5);
 let compBattleship = new Ship(4);
@@ -31,15 +27,12 @@ let compCruiser = new Ship(3);
 let compSubmarine = new Ship(3);
 let compDestroyer = new Ship(2);
 
-let computerShipsToPlace = [
-  compCarrier,
-  compBattleship,
-  compCruiser,
-  compSubmarine,
-  compDestroyer,
-];
+ */
 
 const createBoard = document.querySelector("#create-board");
+const newBtn = document.getElementById("new-game");
+const gameboards = document.querySelector(".gameboards");
+const createSection = document.querySelector(".create");
 
 //initialize gameboards - this will overwrite all objects
 export function initGame() {
@@ -48,21 +41,52 @@ export function initGame() {
   playerBoard = game.player.gameboard;
 
   computerBoard = game.computer.gameboard;
+
+  //create ships
+  let playerCarrier = new Ship(5);
+  let playerBattleship = new Ship(4);
+  let playerCruiser = new Ship(3);
+  let playerSubmarine = new Ship(3);
+  let playerDestroyer = new Ship(2);
+
+  playerShipsToPlace = [
+    playerCarrier,
+    playerBattleship,
+    playerCruiser,
+    playerSubmarine,
+    playerDestroyer,
+  ];
+
+  let compCarrier = new Ship(5);
+  let compBattleship = new Ship(4);
+  let compCruiser = new Ship(3);
+  let compSubmarine = new Ship(3);
+  let compDestroyer = new Ship(2);
+
+  computerShipsToPlace = [
+    compCarrier,
+    compBattleship,
+    compCruiser,
+    compSubmarine,
+    compDestroyer,
+  ];
 }
 
 export function createCreateBoard() {
+  createBoard.innerHTML = "";
   //create create board
   for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 10; j++) {
       const div = document.createElement("div");
-      div.textContent = `${i} ${j}`;
+      //div.textContent = `${i} ${j}`;
       div.setAttribute("id", `create-${i}-${j}`);
 
       createBoard.append(div);
     }
   }
-  const createSection = document.querySelector(".create");
+
   createSection.style.display = "";
+  playerPlacesShips();
 }
 
 export function createPlayerBoard(grid) {
@@ -70,7 +94,7 @@ export function createPlayerBoard(grid) {
     for (let j = 0; j < grid.board.length; j++) {
       const div = document.createElement("div");
       const playerBoard = document.querySelector("#player-board");
-      div.textContent = `${i} ${j}`;
+      //div.textContent = `${i} ${j}`;
       div.setAttribute("id", `player-${i}-${j}`);
 
       playerBoard.append(div);
@@ -87,7 +111,7 @@ export function createComputerBoard(grid) {
     for (let j = 0; j < grid.board.length; j++) {
       const div = document.createElement("div");
       const computerBoard = document.querySelector("#computer-board");
-      div.textContent = `${i} ${j}`;
+
       div.setAttribute("id", `computer-${i}-${j}`);
 
       computerBoard.append(div);
@@ -177,26 +201,7 @@ function computerAttack() {
   playerAttack();
 }
 
-export function placeShipsRandomly() {
-  //place player board ships
-  playerShipsToPlace.forEach((ship) => {
-    let attempts = 0;
-    let direction, row, col;
-    let isShipPlaced;
-    direction = Math.random() > 0.5 ? "horizontal" : "vertical";
-    do {
-      row = Math.floor(Math.random() * 10);
-      col = Math.floor(Math.random() * 10);
-      attempts++;
-      if (attempts > 100) {
-        console.log("failed to place ships");
-        break;
-      }
-      isShipPlaced = playerBoard.placeShip(ship, row, col, direction);
-    } while (!isShipPlaced);
-  });
-  createPlayerBoard(playerBoard);
-
+export function placeCompShipsRandomly() {
   //place computer board ships
   computerShipsToPlace.forEach((ship) => {
     let attempts = 0;
@@ -215,6 +220,28 @@ export function placeShipsRandomly() {
     } while (!isShipPlaced);
   });
   createComputerBoard(computerBoard);
+  console.log(computerBoard);
+}
+
+export function placePlayerShipsRandomly() {
+  //place player board ships
+  playerShipsToPlace.forEach((ship) => {
+    let attempts = 0;
+    let direction, row, col;
+    let isShipPlaced;
+    direction = Math.random() > 0.5 ? "horizontal" : "vertical";
+    do {
+      row = Math.floor(Math.random() * 10);
+      col = Math.floor(Math.random() * 10);
+      attempts++;
+      if (attempts > 100) {
+        console.log("failed to place ships");
+        break;
+      }
+      isShipPlaced = playerBoard.placeShip(ship, row, col, direction);
+    } while (!isShipPlaced);
+  });
+  createPlayerBoard(playerBoard);
 }
 
 export function playerPlacesShips() {
@@ -261,16 +288,22 @@ export function playerPlacesShips() {
       const i = Number(row);
       const j = Number(col);
 
-      playerBoard.placeShip(ship, i, j, direction);
-      updateBoardDisplay(playerBoard);
+      const wasPlaced = playerBoard.placeShip(ship, i, j, direction);
+      if (wasPlaced) {
+        updateBoardDisplay(playerBoard);
 
-      currentShipIndex++;
-      ship = playerShipsToPlace[currentShipIndex];
+        currentShipIndex++;
+        ship = playerShipsToPlace[currentShipIndex];
+      }
 
       if (currentShipIndex >= playerShipsToPlace.length) {
         console.log("all ships placed");
-        createBoard.innerHTML = "";
+        hideCreateSection();
+        newBtn.style.display = "";
+
+        gameboards.style.display = "";
         createPlayerBoard(playerBoard);
+        placeCompShipsRandomly(computerBoard);
         return;
       }
     });
@@ -309,13 +342,24 @@ function endGame(winner) {
   const resetBtn = document.querySelector("button.reset");
   resetBtn.addEventListener("click", () => {
     console.log("reset game");
-    document.getElementById("player-board").innerHTML = "";
-
-    document.getElementById("computer-board").innerHTML = "";
     dialog.close();
     winnerMsg.remove();
-
-    const newBtn = document.querySelector("button#new-game");
-    newBtn.style.display = ""; //todo: way to reset all objects? https://stackoverflow.com/questions/684575/how-to-quickly-clear-a-javascript-object?rq=3
+    resetGame();
   });
+}
+
+export function hideCreateSection() {
+  createBoard.innerHTML = "";
+  createSection.style.display = "none";
+}
+
+function resetGame() {
+  document.getElementById("player-board").innerHTML = "";
+  document.getElementById("computer-board").innerHTML = "";
+
+  gameboards.style.display = "none";
+  newBtn.style.display = "none";
+
+  initGame();
+  createCreateBoard();
 }
