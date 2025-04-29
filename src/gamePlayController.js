@@ -12,23 +12,6 @@ let computerBoard;
 let playerShipsToPlace = [];
 let computerShipsToPlace = [];
 
-/* //create ships
-let playerCarrier = new Ship(5);
-let playerBattleship = new Ship(4);
-let playerCruiser = new Ship(3);
-let playerSubmarine = new Ship(3);
-let playerDestroyer = new Ship(2);
-
-
-
-let compCarrier = new Ship(5);
-let compBattleship = new Ship(4);
-let compCruiser = new Ship(3);
-let compSubmarine = new Ship(3);
-let compDestroyer = new Ship(2);
-
- */
-
 const createBoard = document.querySelector("#create-board");
 const newBtn = document.getElementById("new-game");
 const gameboards = document.querySelector(".gameboards");
