@@ -99,7 +99,7 @@ export function createPlayerBoard(grid) {
 
       playerBoard.append(div);
       if (grid.board[i][j] instanceof Ship) {
-        div.textContent = "ship";
+        //div.textContent = "ship";
         div.classList.add("ship");
       }
     }
@@ -324,7 +324,7 @@ function updateBoardDisplay(grid) {
       if (grid.board[i][j] instanceof Ship) {
         const div = document.getElementById(`create-${i}-${j}`);
 
-        div.textContent = "ship";
+        //div.textContent = "ship";
         div.classList.add("ship");
       }
     }
